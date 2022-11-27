@@ -13,20 +13,9 @@ def MCC(true_z, predicted_z):
         true_z (numpy array): 2D dimensional numpy array, where columns represent variables
         predicted_z (numpy array): _description_
     """
-    # corr_matrix = np.zeros(len(true_z), len(predicted_z))
     num_true = len(true_z[0])
     num_predicted = len(predicted_z[0])
-    corr_matrix = np.corrcoef(
-        true_z, predicted_z, rowvar=False
-    )  # [[np.corrcoef(z1, z2) for z1 in true_z] for z2 in predicted_z]
-    # print(corr_matrix)
-    # print("indexed")
-    # print(f"num predicted {num_predicted}")
-    # print(corr_matrix[0:3, -num_predicted:-1])
-    # print(corr_matrix[0:num_true, -num_predicted:6])
-    # print(f"indices: 0:{num_true}, {num_true+1}")
-    # print(corr_matrix[0:num_true, num_true : len(corr_matrix[0]) + 1])
-    # print(corr_matrix[:, -1])
+    corr_matrix = np.corrcoef(true_z, predicted_z, rowvar=False)
     reduced_matrix = corr_matrix[
         0:num_true, num_true : len(corr_matrix[0]) + 1
     ]  # where rows are true and columns are predicted
