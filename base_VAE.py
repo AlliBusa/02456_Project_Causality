@@ -4,6 +4,7 @@ from torch import nn, Tensor
 from typing import Tuple, Dict
 import numpy as np
 
+
 class VariationalInference(nn.Module):
     def __init__(self, beta: float = 1.0):
         super().__init__()
@@ -52,11 +53,15 @@ class VariationalInference(nn.Module):
 
 ## Training Loop
 
-def reduce(x:Tensor) -> Tensor:
+
+def reduce(x: Tensor) -> Tensor:
     """for each datapoint: sum over all dimensions"""
     return x.view(x.size(0), -1).sum(dim=1)
-    
-def run_training(vae, train_loader, test_loader, optimizer, vi, num_epochs=50):
+
+
+def run_training(
+    vae, train_loader, test_loader, optimizer, vi, num_epochs=50,
+):
 
     # define dictionary to store the training curves
     training_data = defaultdict(list)
@@ -70,6 +75,8 @@ def run_training(vae, train_loader, test_loader, optimizer, vi, num_epochs=50):
     # move the model to the device
     vae = vae.to(device)
 
+    # gather latent vars
+    latent_vars = []
     # training..
     while epoch < num_epochs:
         epoch += 1
@@ -115,7 +122,11 @@ def run_training(vae, train_loader, test_loader, optimizer, vi, num_epochs=50):
             for k, v in diagnostics.items():
                 validation_data[k] += [v.mean().item()]
 
-        # Reproduce the figure from the begining of the notebook, plot the training curves and show latent samples
-        # make_vae_plots(vae, x, y, outputs, training_data, validation_data)
+            # gather latent variables
+            # if epoch == 0:
+            #     latent_vars = pd.Dataframe()
+            # print("epoch?")
+            # latent_vars.append(outputs["z"].cpu().numpy())
+            # print(f"{latent var shape {np.shape(latent_vars)} \n shape of data going in })
 
-        return outputs, loss, diagnostics
+    return outputs, loss, diagnostics  # , latent_vars
