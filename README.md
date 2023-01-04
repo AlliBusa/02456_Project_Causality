@@ -9,4 +9,4 @@ The methods we reproduced from *Invariant Causal Representation Learning for Out
 
 [**Report_Notebook_SyntheticData.ipynb**](Report_Notebook_SyntheticData.ipynb) is a Jupyter Notebook in which you can find our code for the Synthetic Data experiments. 
 
-**Report_Notebook_CMNIST.ipynb** is a Jupyter Notebook in which you can find our code for the CMNIST experiments. 
+**Report_Notebook_CMNIST.ipynb**(Report_Notebook_CMNIST.ipynb) is a Jupyter Notebook in which you can find our code for the CMNIST experiments. 
